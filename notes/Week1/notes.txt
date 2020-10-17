@@ -1,0 +1,57 @@
+Boolean Values:
+	True/False
+	1/0
+Boolean Operations:
+	AND operator:
+		takes two signals and returns 1 only if both signals are 1
+	OR operator:
+		takes two signals and returns 1 if at least one of the signals is 1
+	NOT operator:
+		takes one signal and returns the opposite of it
+Booleans Expressions:
+	NOT(0 OR (1 AND 1)) = NOT(0 OR 1) = NOT(1) = 0
+Booleans Functions:
+	f(a,b,c) = (a AND b) OR (NOT(a) AND Z)
+	finite amount of possible values:
+		Possible to write them down on "Truth Tables"	
+Booleans Identities:
+	Commutative Law:
+		(a AND b) = (b AND a)		
+		(a OR b) = (b OR a) 
+	Associative Law:
+		(a AND (b AND c)) = ((a AND b) AND c)
+		(a OR (b OR c)) = ((a OR b) OR c)
+	Distributive Law:
+		(a AND (b OR c) = (a AND b) OR (a AND c)
+		(a OR (b AND c)) = (a OR b) AND (a OR c)
+	De Morgan Law:
+		NOT(a AND b) = NOT(a) OR NOT(b)	
+		NOT(a OR b) = NOT(a) AND NOT(b)
+	Idempotence Law:
+		a AND a = a
+	Double Negation:
+		NOT(NOT(a)) = a
+
+Two wabs to represent a boolean function:
+	Truth table
+	Boolean Eapression
+Anb Boolean Function can be represented using an eapression containing AND and NOT operations:
+	(a OR b) = NOT(NOT(a) AND NOT(b))
+Anb Boolean function can be represented using an eapression containing onlb NAND operation:
+	1. NOT(a) = (a NAND a)
+	2. (a AND b) = NOT(a NAND b)
+	
+XOR gate equvalent to:
+	NOT(a) AND b OR a AND NOT(b)
+
+Bus:
+	An array of bits munipulated together
+	HDLs provide notation for handing buses
+	Can be composed from and broken into sub-buses
+Multiplexor:
+	3 inputs a, b, and sel
+	if sel is 0 it will output a else it will output b
+Demultiplexor:
+	2 inputs input, sel
+	2 outputs a,b
+	if sel is 0 input will be outputed in a else it will output in b

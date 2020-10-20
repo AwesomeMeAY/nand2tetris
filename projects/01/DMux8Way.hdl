@@ -4,10 +4,14 @@
 // File name: projects/01/DMux8Way.hdl
 
 /**
- * 8-way demultiplexor:
+ * 8-way demultiplexor:       				 	  210
  * {a, b, c, d, e, f, g, h} = {in, 0, 0, 0, 0, 0, 0, 0} if sel == 000
  *                            {0, in, 0, 0, 0, 0, 0, 0} if sel == 001
- *                            etc.
+ *                            {0, 0, in, 0, 0, 0, 0, 0} if sel == 010
+			      {0, 0, 0, in, 0, 0, 0, 0} if sel == 011
+			      {0, 0, 0, 0, in, 0, 0, 0} if sel == 100
+			      {0, 0, 0, 0, 0, in, 0, 0} if sel == 101
+			      {0, 0, 0, 0, 0, 0, in, 0} if sel == 110
  *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
  */
 
@@ -16,5 +20,17 @@ CHIP DMux8Way {
     OUT a, b, c, d, e, f, g, h;
 
     PARTS:
-    // Put your code here:
+    	Not(in=sel[0], out=notSel0);
+	Not(in=sel[1], out=notSel1);
+	Not(in=sel[2], out=notSel2);
+
+	And4(a=in, b=notSel2, c=notSel1, d=notSel0, out=a);	
+	And4(a=in, b=notSel2, c=notSel1, d=sel[0], out=b);
+	And4(a=in, b=notSel2, c=sel[1], d=notSel0, out=c);
+	And4(a=in, b=notSel2, c=sel[1], d=sel[0], out=d);
+	And4(a=in, b=sel[2], c=notSel1, d=notSel0, out=e);
+	And4(a=in, b=sel[2], c=notSel1, d=sel[0], out=f);
+	And4(a=in, b=sel[2], c=sel[1], d=notSel0, out=g);
+	And4(a=in, b=sel[2], c=sel[1], d=sel[0], out=h);
+    	
 }

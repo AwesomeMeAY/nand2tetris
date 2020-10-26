@@ -11,7 +11,15 @@ CHIP FullAdder {
     IN a, b, c;  // 1-bit inputs
     OUT sum,     // Right bit of a + b + c
         carry;   // Left bit of a + b + c
+		 // If there are >=2 ones, carry = 1
+		 // If There are an odd amount of ones, sum = 1
+		 
 
     PARTS:
-    // Put you code here:
+	HalfAdder(a=b, b=c, sum=BCS, carry=BCC);
+	Xor(a=a, b=BCS, out=sum);
+	And(a=a, b=b, out=aAndB);
+	And(a=a, b=c, out=aAndC);
+	Or(a=aAndC, b=aAndB, out=abOrAc);
+	Or(a=abOrAc, b=BCC, out=carry);
 }

@@ -1,0 +1,88 @@
+Half Adder:
+	Adds two bits 
+	takes in the two bits you want to add
+	outputs the sum and carry on
+Full adder:
+	Adds three bits, the two you are adding and the carry on
+	ouptuts sum and carry on
+Most Significant Digit:
+	The last digit from right to left
+	100
+	one is MSD
+2's Complement:
+	Represent Negative number -x using the positive number:
+		2^n - x
+		Example:
+			2^4 = 16 
+			want to represent -5
+			16 - 5 = 11
+			1011 = 11
+			1011 now = -5
+	Addition works:
+		-2 + -3 = -5
+		1110 + 1101 = 1011	
+		1011 = -5
+	Subtraction works:
+		6 + -3 = 3
+		6 = 0110
+		-3 = 1101
+		0110 + 1101 = 0011
+		0011 = 3
+	Computing -x:
+		-x = (2^n - 1) - x + 1
+		Example:
+			x = 7
+			2^4 = 16
+ 			16 - 1 = 15
+			15 = 1111
+			15 - 7 + 1 = 9
+			9 = 1001
+			1001 = -7
+			
+Von Neumann Architecture:
+	Description on how general purpose computers can be built
+	ALU:
+		Arithmetic Logic Unit
+		Computes a function on two inputs and outputs result
+			function:
+				arithmetic operations:
+					addition, multiplication, etc
+				logical operations:
+					AND, OR, XOR, etc
+ALU example:
+	Operates on two 16-bit two's complement values:
+		x,y
+	Outputs one 16-bit two's complement value
+	Which function to compute is set by six 1 bit inputs:
+		zx:
+			If zx is 1, then x=0
+		nx:
+			if nx is 1 then x = NOT(x)
+		zy:
+			If zy is 1 then y = 0 
+		ny:
+			If ny is 1 then y = NOT(x)
+		f:
+			if f is 1 then out = x + y
+			if f is 0 then out = AND(x,y)
+		no:
+			if no is 1 then out = NOT(out)	
+	Computes one out of a family of 18 functions
+	Also outputs two 1 bit values:
+		zr:
+			if out = 0 then zr = 1
+		ng:
+			if out is negative then ng = 1
+		Used in computer architecture
+Half adder:
+	adds two bits
+	two input bits (a,b)
+	two output bits (sum, carry)
+Full adder:
+	adds three bits (two and one carry)
+	two output bits (sum, carry)
+16-bit adder:
+	two input 16-bit buses 
+16-bit incrementor:
+	in + 1
+ALU

@@ -29,16 +29,18 @@ def convert_to_base(num,exponents):
         return_string += str(num//i)
         num %= i
     return return_string
-        
-if __name__ == '__main__':
-    s = int(argv[1])
-    v = int(argv[2])
+def run_program(s, v):
     for i in range(s**v):
         n = convert_to_base(i,calculate_nearest_exponent(i,s))
         while v > len(n):
             n = '0' + n
         while len(n) > v:
             n = n[1:]
-        print(n)
+        yield n
+if __name__ == '__main__':
+    s = int(argv[1])
+    v = int(argv[2])
+    for i in run_program(s,v):
+        print(i)
         
             

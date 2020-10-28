@@ -42,5 +42,37 @@ CHIP ALU {
         ng; // 1 if (out < 0),  0 otherwise
 
     PARTS:
-   // Put you code here:
+    	// zx handling 
+    	Mux16(a=x, b=false, sel=zx, out=zxOutput);	
+
+	// nx handling
+	Not16(in=zxOutput, out=Notx);
+	Mux16(a=zxOutput, b=Notx, sel=nx, out=nxOutput);
+
+	// zy handling
+	Mux16(a=y, b=false, sel=zy, out=zyOutput);
+	
+	// ny handling
+	Not16(in=zyOutput, out=Noty);
+	Mux16(a=zyOutput, b=Noty, sel=ny, out=nyOutput);
+
+	// f handling
+	And16(a=nxOutput, b=nyOutput, out=ifF0);
+	Add16(a=nxOutput, b=nyOutput, out=ifF1);
+	Mux16(a=ifF0, b=ifF1, sel=f, out=foutput);
+
+	// no handling
+	Not16(in=foutput, out=noutput);
+	Mux16(a=foutput, b=noutput, sel=no, out=finalOutput);
+
+	// have to do it this way because of limitations with the hdl
+	And16(a=finalOutput, b=finalOutput, out=out);
+
+	// zr handling
+	Or16Way(in=finalOutput, out=or015);
+	Not(in=or015, out=zr);
+
+	// ng handling 
+	NegChecker(in=finalOutput, out=ng);
+
 }

@@ -14,5 +14,12 @@ CHIP Bit {
     OUT out;
 
     PARTS:
-    // Put your code here:
+   	Not(in=load, out=notLoad);
+        And(a=dffOutput, b=notLoad out=and1);	
+	And(a=load, b=in, out=and2);
+	Or(a=and1, b=and2, out=output);
+	DFF(in=output, out=dffOutput);
+	// do it this way because of limitations with hdl
+	And(a=dffOutput, b=dffOutput, out=out);
+	
 }

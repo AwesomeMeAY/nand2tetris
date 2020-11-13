@@ -16,5 +16,15 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+   	Or(a=inc, b=load, out=incOr); 
+	Or(a=incOr, b=reset, out=loadBit);
+
+	Inc16(in=registerOut, out=incOut);
+	Mux16(a=incOut, b=in, sel=load, out=IncMux);
+	Mux16(a=IncMux, b=false, sel=reset, out=last);
+    	Register(in=last, load=loadBit, out=registerOut);
+
+	// do it this way because of limitations with hdl
+	And16(a=registerOut, b=registerOut, out=out);
+
 }

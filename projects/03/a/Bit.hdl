@@ -15,7 +15,7 @@ CHIP Bit {
 
     PARTS:
    	Not(in=load, out=notLoad);
-        And(a=dffOutput, b=notLoad out=and1);	
+        And(a=dffOutput, b=notLoad, out=and1);	
 	And(a=load, b=in, out=and2);
 	Or(a=and1, b=and2, out=output);
 	DFF(in=output, out=dffOutput);

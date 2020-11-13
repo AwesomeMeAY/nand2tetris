@@ -1,0 +1,55 @@
+Machine Language:
+	Interface between software and hardware
+	Cost-Performance trade-off
+	3 Basic Elements:
+		Operations:
+			Usually Correspond to what's implemented in Hardware:
+				Arithmetic Operations
+				Logical operations
+				Flow Control:
+					goto instruction X
+					if c then goto instruction y
+			Differences between machine languages:
+				richness of the set of operations
+				data types 
+				
+		Program Counter 
+		Addressing:
+			Accessing memory location is expensive:
+				Need to supply a long address
+				Getting the memory contents into the CPU takes time
+			Memory Hierarchy:
+				The smallest storage is fasted, but gets slower and bigger the further away from the CPU
+				Registers:
+					CPUs usually contain a few easily accessed registers
+					their number and functions are a central part of the machine language
+					Can store contents in bigger memory
+				Addressing Modes:
+					Register:
+						Preform an operation with registers
+					Direct:
+						Preform operation with a register and memory address
+					Indirect:
+						Store an operation on a memory address
+					Immediate:
+						Store an operation in register
+			Input / Output:
+				CPU needs some kind of protocol to talk to different devices:
+					Software drivers know these protocols
+				Memory Mapping
+		Flow Control:
+			usually the CPU executes machine instruction in sequence
+			Jump:
+				Sometimes we need to jump unconditionally to another location
+				Moves to a different location in memory
+			Conditional Jump:
+				Sometimes we need to jump only if some condition is met
+	Instructions:
+		A sequence of bits
+		(0100010)(0011)(0010)
+		ADD R3 R2
+		010001000110010 means add register 3 and register 2 together
+		The "symbolic form" doesn't really exist but is a convenient mnemonic to present machine language instructions to humans
+		
+
+		

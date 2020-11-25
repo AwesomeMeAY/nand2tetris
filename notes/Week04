@@ -19,7 +19,7 @@ Machine Language:
 				Need to supply a long address
 				Getting the memory contents into the CPU takes time
 			Memory Hierarchy:
-				The smallest storage is fasted, but gets slower and bigger the further away from the CPU
+				The smallest storage is fastest, but gets slower and bigger the further away from the CPU
 				Registers:
 					CPUs usually contain a few easily accessed registers
 					their number and functions are a central part of the machine language
@@ -50,6 +50,79 @@ Machine Language:
 		ADD R3 R2
 		010001000110010 means add register 3 and register 2 together
 		The "symbolic form" doesn't really exist but is a convenient mnemonic to present machine language instructions to humans
-		
+Hack Machine Language:
+	A-instruction:
+		Syntax:
+			@Value
+			Where value is either:
+				a non-negative decimal constant 
+				a symbol referring to such a constant	
+			Semantics:
+				Sets the A register to value
+				Ram[A] becomes the selected RAM register
+	C-Instruction:
+		Destination = Computation; jump:
+			Destination and jump are optional
+		Computation:
+			Operations created in hardware 
+		Destination:
+			addresses in a register or in memory
+		Jump:
+			A position somewhere in the set of instructions
+		To ways to write machine language:
+			Symbolic (Assembly):
+				dest = comp; jump
+			Binary:
+				16 bits wide
+				(1)(1 1)(a c1 c2 c3 c4 c5 c6)(d1 d2 d3)(j1 j2 j3)
+				first bit is op code and decides whether the instruction is an "A" instruction (0) or a "C" instruction (1)
+				Next two bits are unused
+				next six bits are computation bits and are sent to the ALU
+				The three bits after that are destination bits
+				The last three bits are the jump condition
+Screen Memory map:
+	A designated memory are dedicated to manage a display unit
+	The physical display is continuously refreshed from the memory many times per second
+To set pixel in (row, col) on/off:
+	pixel = Screen[32*row + col/16]
+	pixel = RAM[16384 + 32*row + col/16]
+	sel the (col%16)th bits of word to 0 or 1
+Keyboard memory map:
+	when a key is pressed on the keyboard the key's scan code appears in the keyboard memory map
+	Check which key is pressed:
+		read from keyboard chip
+		in hack computer:
+			read the contents of RAM[24576]
+Hack Programming:
+	Registers and memory:
+		D register 
+		A register
+		M = Ram[A]
+Branching:
+	- Fundamental ability to tell the computer to evaluate a certain boolean expression 
+	and decide whether or not to jump and execute a different section of code
+	Symbolic References:
+		A label for a section of code for assembly 
+		Syntax:
+			(label) --declaring a label; Ignored when translated to machine code
+			@label --using label; translates to @n where n is the instruction number following the (LABEL) declaration
+		Instruction Number:
+			Line number for code that is read by CPU (Does not count lines that are ignored by CPU)
+Variables:
+	An abstraction of a container that has a name and a value
+	Syntax:
+		@variable_name
+	Finds an available memory register and uses it as the memory register until a new register is declared
+	A reference to a symbol that has no corresponding label declaration is treated as a reference to a variable
+	Variables are allocated to the RAM from Address 16 onward
+Best practice:
+	Design the program using pseudo code
+	Write the program in assembly language
+	test the program using a variable-value trace table 	
+Pointers:
+	variables that store memory addresses 
+	hack pointer logic:
+		whenever we have to access memory using a pointer, we need an instruction like a=m
+	Typical pointer semantics:
+		Set the address register to the contents of some memory register
 
-		

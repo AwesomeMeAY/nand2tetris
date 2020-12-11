@@ -1,0 +1,75 @@
+Von Neumann Architecture:
+	Elements:
+	Three types of information:
+		Data
+		Address 
+		Control	
+The Fetch-Execute Cycle
+	The basic CPU loop:
+		Fetch:
+			an instruction from the program memory
+			Fetching:
+				put the location of the next instruction into the address of the program memory
+				get the instruction code itself by reading the memory contents at that location
+		Execute:
+			Often different subsets of the bits control different aspects of the operation 
+			executing the operation involved also accessing registers and/or data memory
+Hack CPU Interface:
+	Input:
+		inM:
+			input number
+			16 bits wide
+			comes from data memory
+		instruction:
+			The task that needs to be completed
+			16 bits wide
+			comes from instruction memory
+		reset:
+			1 bit wide
+			user sets it
+	Output:
+		outM:
+			output number
+			16 bits wide
+			sent to data memory
+		writeM:
+			load bit
+			1 bit wide
+			set to data memory
+		AddressM:
+			the register address in memory
+			15 bits wide
+			sent to data memory
+		pc:
+			next register address in instruction memory 
+			15 bits wide
+			sent to instruction memory
+Hack CPU Operation:
+	If the instruction includes D and A the respective values are read from and/or written to the Cpu resident D-register and A-register
+	If the instruction is @x then x is stored in the A-register; this value is emitted by addressM
+	If the instruction declares the value of M this value is read from inM	
+	If the instruction uses M's value in an operation ten the ALU output is emitted by outM and the writeM bit is asserted
+	
+	CPU Jump operation:
+		The CPU logic uses the instruction's jump bits and the ALU's output to decide if there should be a jump
+		If there is a jump:
+			PC is set to the Value of the A-register
+		Else no jump and the PC continues as normal
+		The updated PC value is emitted by pc
+Memory:
+	Abstraction:
+		Address 0 to 16383:
+			Data memory
+		Address 16384 to 24575:
+			Screen memory map
+		Address 24576:
+			Keyboard memory map
+Instruction Memory:
+	ROM 32K	
+	Loading a program:
+		plug and play ROM chips
+	Hardware simulation:
+		programs are stored in text files; program loading is emulated by the built-in ROM chip
+	
+		
+		

@@ -39,5 +39,65 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    // Put your code here:
+    	// load bit for D register)
+    	And(a=instruction[4], b=instruction[15], out=loadD);
+
+    	// If instruction[15] is 0 then it is an A instruction
+   	Not(in=instruction[15], out=AInstruction);
+
+	// Load bit for A register
+	Or(a=AInstruction, b=instruction[5], out=loadInA);	
+
+	// Decides whether to store a value or a memory address in A register  
+	And(a=instruction[15], b=instruction[5], out=storeInA);	
+
+	// Sends either a value or a memory address to A register
+	Mux16(a=instruction, b=ALUOutput, sel=storeInA, out=AInput);
+
+	// A register
+	ARegister(in=AInput, load=loadInA, out=ARegister);
+
+	// D register
+	DRegister(in=ALUOutput, load=loadD, out=dRegister);
+
+	// Decides whether the operation will use A register or the memory value
+	And(a=instruction[15], b=instruction[12], out=memoryInput);
+
+	// Sends either the memory value or the A register to the ALU
+	Mux16(a=ARegister, b=inM, sel=memoryInput, out=AMuxMemory);
+
+	// Arithmetic/Logical operations
+	ALU(x=dRegister, y=AMuxMemory, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], 
+	    f=instruction[7], no=instruction[6], out=ALUOutput, zr=zrOutput, ng=ngOutput);
+
+	// Get right formating for output
+	And16(a=ALUOutput, b=ALUOutput, out=outM);
+	And(a=instruction[15], b=instruction[3], out=writeM);
+	And16(a=ARegister, b=ARegister, out[15]=null, out[0..14]=addressMOut);
+	And16(a[15]=false, a[0..14]=addressMOut, b[15]=false, b[0..14]=addressMOut, out[15]=null1, out[0..14]=addressM);
+
+	// If zr and ng are both zero than ALU output is > 0 and this will return 1
+	Or(a=zrOutput, b=ngOutput, out=notGreaterZero);
+	Not(in=notGreaterZero, out=aluGreaterZero);
+
+	And(a=instruction[0], b=aluGreaterZero, out=greaterZero);
+	And(a=instruction[1], b=zrOutput, out=equalZero);
+	And(a=instruction[2], b=ngOutput, out=lessZero);
+
+	Or(a=greaterZero, b=equalZero, out=greatEqualZero);
+	Or(a=greatEqualZero, b=lessZero, out=loadBit);
+	And(a=instruction[15], b=loadBit, out=load);
+
+
+
+	PC(in[15]=false, in[0..14]=addressMOut, load=load, inc=true, reset=reset, out[15]=null2, out[0..14]=pc);
+	
+
+	
+	
+
+	
+	
+
 }
+

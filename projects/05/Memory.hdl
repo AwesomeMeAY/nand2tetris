@@ -27,5 +27,11 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+	DMux(in=load, sel=address[14], a=loadRAM, b=loadScreen);
+	RAM16K(in=in, load=loadRAM, address=address[0..13], out=outputRAM);
+	Screen(in=in, load=loadScreen, address=address[0..12], out=outputScreen);
+	Keyboard(out=outputKBD);
+
+	// Since the second bit in sel is if all the bits are on, 01 is imposible so b is set to off
+	Mux4Way16(a=outputRAM, b=outputRAM, c=outputScreen, d=outputKBD, sel[0]=address[13], sel[1]=address[14], out=out);
 }

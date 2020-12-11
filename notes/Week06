@@ -1,0 +1,26 @@
+CHALLENGE:
+	write an assembler in shell and in python
+Basic Assembler Logic:
+	Repeat, until end-of-file is reached:
+		Read the next assembly language command:
+			Ignore white space
+			Read a line as an array of characters
+		Break it into the different fields it is composed of:
+		Lookup the binary code for each field 
+		Combine these codes into a single machine language command 
+		Output this machine language command
+Symbols:
+	Continue writing later
+	Labels:
+		Forward references:
+			Label called on before defined
+			possible solutions:
+				leave blank until label appears then fix
+				in first pass just figure out all addresses
+	Variables:
+		Assemblers must replace names with address
+		Table with the variable and the address 
+		
+
+	
+	 

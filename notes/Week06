@@ -20,6 +20,17 @@ Symbols:
 	Variables:
 		Assemblers must replace names with address
 		Table with the variable and the address 
+Assembly program elements:
+	White space / indentation
+	Line comments
+	In-Line comments
+	Instruction
+		A-instructions
+		C-instructions
+	Symbols:
+		References 
+		Label Declarations
+	
 		
 
 	

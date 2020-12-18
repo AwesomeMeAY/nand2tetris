@@ -1,6 +1,6 @@
 #!/bin/env python
 # Not official nand2tetris software
-# Created by AwesomeMeAY
+# Created by JustJojo
 
 # Formula for the amount of combinations is s**v
 # s being the amount of states a variable has

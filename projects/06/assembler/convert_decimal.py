@@ -23,5 +23,6 @@ def convert_to_binary(num):
 if __name__ == '__main__': 
     for i in range(100):
         print(convert_to_binary(i))
+    print(f'I print strings {len(convert_to_binary(15))} letters long!')
 
 

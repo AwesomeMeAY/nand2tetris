@@ -1,2 +1,24 @@
 VM Abstractions (The Stack):
+	Balance must be set:
+		VM language should be high-level so it's easier to translate the high-level code to vm code
+		VM language should be low-level so it's easier to translate between machine code and vm code
+	Stack machine abstraction:
+		Stack operations:
+			push:
+				add a value at the stack's top
+			pop:
+				remove the top value and write that value to memory
+		Stack arithmetic:
+			Add:
+				pop top two values, add them, then push to stack
+			Neg:
+				negate top most value
+			Applying a function f on the stack:
+				pops the arguments(s) from the stack
+				computes f on the arguments
+				pushes the result onto the stack
+			
+		Architecture:
+		Commands
+	
 	
